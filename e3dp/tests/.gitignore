@@ -1,0 +1,14 @@
+out/
+local.env
+__pycache__/
+.pytest_cache/
+report/*.md
+report/*.html
+report/*.xml
+report/*.json
+report/*.log
+coverage.xml
+.coverage
+.coverage.*
+htmlcov/
+*.py[cod]

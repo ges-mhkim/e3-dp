@@ -1,0 +1,17 @@
+/opt/e3dp/bin/acon_agent
+/opt/e3dp/bin/alarm_server
+/opt/e3dp/bin/config_server
+/opt/e3dp/bin/control_server
+/opt/e3dp/bin/db_server
+/opt/e3dp/bin/gather_server
+/opt/e3dp/bin/gw_server 1
+/opt/e3dp/bin/gw_server 6
+/opt/e3dp/bin/main_server
+/opt/e3dp/bin/modbus_server
+/opt/e3dp/bin/netcheck_server
+/opt/e3dp/bin/realdata_server
+/opt/e3dp/bin/rect_server
+/opt/e3dp/bin/rt_server
+/opt/e3dp/bin/scan_server
+/opt/e3dp/bin/smm
+/opt/e3dp/bin/wan_led

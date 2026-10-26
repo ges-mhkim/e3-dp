@@ -1,0 +1,8 @@
+/202*/*.json
+/202*/*.img
+/202*/*.img.*
+/poc/*.json
+/poc/*.img
+/poc/*.img.*
+/os_*
+/_backup
