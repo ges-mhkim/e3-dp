@@ -1,0 +1,1367 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "pkg:generic/e3-dp-acagent_checker-188dce8e@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "188dce8e16b431bea5c175022e2134005be6838ef13fad977130fab885ec9d9c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "acagent_checker",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/acagent_checker\", \"src/acagent_checker/acagent_checker\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-acagent_checker-188dce8e@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-acon_agent-33269392@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33269392e3ff43300edc1c00a38b7580db2e6c35a4664807baf0e7e818add252"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "acon_agent",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/acon_agent\", \"src/acon_agent/acon_agent\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-acon_agent-33269392@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-alarm_server-412d91a4@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "412d91a4b4f361608fe936ab92d41a485b03fefe77a19782ca033787c86beb09"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "alarm_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/alarm_server\", \"src/alarm/alarm_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-alarm_server-412d91a4@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-comp-35ef0986@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "35ef098687e2fdbac4364711351e61b202601a21f24e634a32180dbee6fbea03"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "comp",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/comp\", \"src/util/comp\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-comp-35ef0986@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-config-51cabcd6@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51cabcd6f4ec26404834976a45ad8c7782ceab9a30ab1da5f15efcb6edc91fc8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "config",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/config\", \"src/util/config\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-config-51cabcd6@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-config_server-82795f04@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "82795f04028143ce858b390501f423e338ec523252aea01f72abd132677cc7c8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "config_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/config_server\", \"src/config/config_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-config_server-82795f04@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-control_server-771bb681@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "771bb6818dbf49d2d6b06b2a07d8593c86cf83e586b7c22764522c03dd10babb"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "control_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/control_server\", \"src/control/control_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-control_server-771bb681@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-db_server-912d97c8@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "912d97c8dc43f875d1457692da30cde284737e39c07b76ef73734efdd745a079"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "db_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/db_server\", \"src/db/db_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-db_server-912d97c8@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-emon-d9582fad@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d9582fad29ce7662f0fcbc655ce25efb92bf89481786c5b1a4489baa5ff67e79"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "emon",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/emon\", \"src/emon/emon\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-emon-d9582fad@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-gather_server-4cf6cbb5@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4cf6cbb5caf01ded8fa55956bb79e859cc627309d51105401c2948f17b98b3f5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "gather_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/gather_server\", \"src/gather/gather_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-gather_server-4cf6cbb5@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-gw_server-51d10607@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51d10607122153a10ae3fe19636cd2c6feb6619bc075fea4578c42a639147fed"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "gw_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/gw_server\", \"src/gw/gw_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-gw_server-51d10607@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-index-231fbd51@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "231fbd5194ad3593a48f38f6e67180903a3b7e7edd4d25e81c25cdf4d1fa343a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "index",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"web/index.cgi\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-index-231fbd51@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-login-72903218@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "72903218d79c8c865d57941506a881b40dfd9a31a94651c636aa7bff6638de03"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "login",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"web/login.cgi\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-login-72903218@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-main_server-985b1f06@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "985b1f068d75612e31051b818186dabf742dfadc721ebbf2d59127a94de95e89"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "main_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/main_server\", \"src/main/main_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-main_server-985b1f06@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-modbus_server-aeabec46@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aeabec46f619c8c752b735d529b09bb5fe5ab2bb5d9b49ea574c2aaa5eacbf46"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "modbus_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/modbus_server\", \"src/modbus/modbus_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-modbus_server-aeabec46@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-netcheck_server-15726e06@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "15726e060cb4849216423ad1f5615ee4f5fce6e8cca2f228fa67826722e69e33"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "netcheck_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/netcheck_server\", \"src/netcheck/netcheck_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-netcheck_server-15726e06@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-port-fde1cedd@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fde1cedd75968c0c6e97712a56099d0ffc6e3a3c1e93410c536fb5bb877f7914"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "port",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/port\", \"src/util/port\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-port-fde1cedd@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-proc_checker-df282a3c@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "df282a3cd8431caf3b499c957a3ed02be4d85c4b1f3de95a8dfba246cf3b3e4b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "proc_checker",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"src/acagent_checker/proc_checker\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-proc_checker-df282a3c@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-realdata_server-cfc0c9a0@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cfc0c9a08fc06e011122ce129b35dcb449ba588bd5ed72c42e8ad9349e549cd8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "realdata_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/realdata_server\", \"src/realdata/realdata_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-realdata_server-cfc0c9a0@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-rect_server-92a0ea19@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "92a0ea19cbaec638a6b2e0e69f6bcd210d09363e30d06d0e745fcb525552da00"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "rect_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/rect_server\", \"src/rect/rect_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-rect_server-92a0ea19@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-rt_server-4bcf0093@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4bcf00935a1e224e0c944c91d94259cc6cc7f97e19d104ea2cd0a7ae3c729799"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "rt_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/rt_server\", \"src/rt/rt_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-rt_server-4bcf0093@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-scan_server-d7237007@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d72370071123a4bc05768eb01f6ddcbf7b834744d438754edfaa2d23f96150e6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "scan_server",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/scan_server\", \"src/scan/scan_server\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-scan_server-d7237007@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-smm-2dc39c54@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2dc39c54dd894e57215571f69e6699e84186c71633d84cc7945fcfff0b4e17bf"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "smm",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/smm\", \"src/smm/smm\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-smm-2dc39c54@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-station-1416f339@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1416f3399026ab81aa175058dce9cd66f120b8c4e6152ac1be89c2a8b4347e8c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "station",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/station\", \"src/util/station\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-station-1416f339@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-sys-2b5fea3c@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2b5fea3c04f47a7c0fa0a7d1b8620f9c12cb5a60330afbcee46eb66fcbc9bb73"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "sys",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/sys\", \"src/util/sys\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-sys-2b5fea3c@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    },
+    {
+      "bom-ref": "pkg:generic/e3-dp-wan_led-3f2eb6ea@03.01.12",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3f2eb6eac278ccb838cb86ad89b6eec390b712fd4ad5e1aa596314eb30c5fe46"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "wan_led",
+      "properties": [
+        {
+          "name": "ges:binary:paths",
+          "value": "[\"bin/wan_led\", \"src/wan_led/wan_led\"]"
+        },
+        {
+          "name": "ges:component:from",
+          "value": "SRC"
+        },
+        {
+          "name": "ges:elf:type",
+          "value": "EXEC"
+        },
+        {
+          "name": "ges:license-basis",
+          "value": "product_info.license"
+        },
+        {
+          "name": "ges:version-basis",
+          "value": "Firmware release 03.01.12"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp-wan_led-3f2eb6ea@03.01.12",
+      "scope": "required",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "application",
+      "version": "03.01.12"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:generic/e3-dp-acagent_checker-188dce8e@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-acon_agent-33269392@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-alarm_server-412d91a4@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-comp-35ef0986@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-config-51cabcd6@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-config_server-82795f04@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-control_server-771bb681@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-db_server-912d97c8@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-emon-d9582fad@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-gather_server-4cf6cbb5@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-gw_server-51d10607@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-index-231fbd51@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-login-72903218@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-main_server-985b1f06@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-modbus_server-aeabec46@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-netcheck_server-15726e06@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-port-fde1cedd@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-proc_checker-df282a3c@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-realdata_server-cfc0c9a0@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-rect_server-92a0ea19@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-rt_server-4bcf0093@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-scan_server-d7237007@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-smm-2dc39c54@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-station-1416f339@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-sys-2b5fea3c@03.01.12"
+    },
+    {
+      "ref": "pkg:generic/e3-dp-wan_led-3f2eb6ea@03.01.12"
+    },
+    {
+      "dependsOn": [
+        "pkg:generic/e3-dp-acagent_checker-188dce8e@03.01.12",
+        "pkg:generic/e3-dp-acon_agent-33269392@03.01.12",
+        "pkg:generic/e3-dp-alarm_server-412d91a4@03.01.12",
+        "pkg:generic/e3-dp-comp-35ef0986@03.01.12",
+        "pkg:generic/e3-dp-config-51cabcd6@03.01.12",
+        "pkg:generic/e3-dp-config_server-82795f04@03.01.12",
+        "pkg:generic/e3-dp-control_server-771bb681@03.01.12",
+        "pkg:generic/e3-dp-db_server-912d97c8@03.01.12",
+        "pkg:generic/e3-dp-emon-d9582fad@03.01.12",
+        "pkg:generic/e3-dp-gather_server-4cf6cbb5@03.01.12",
+        "pkg:generic/e3-dp-gw_server-51d10607@03.01.12",
+        "pkg:generic/e3-dp-index-231fbd51@03.01.12",
+        "pkg:generic/e3-dp-login-72903218@03.01.12",
+        "pkg:generic/e3-dp-main_server-985b1f06@03.01.12",
+        "pkg:generic/e3-dp-modbus_server-aeabec46@03.01.12",
+        "pkg:generic/e3-dp-netcheck_server-15726e06@03.01.12",
+        "pkg:generic/e3-dp-port-fde1cedd@03.01.12",
+        "pkg:generic/e3-dp-proc_checker-df282a3c@03.01.12",
+        "pkg:generic/e3-dp-realdata_server-cfc0c9a0@03.01.12",
+        "pkg:generic/e3-dp-rect_server-92a0ea19@03.01.12",
+        "pkg:generic/e3-dp-rt_server-4bcf0093@03.01.12",
+        "pkg:generic/e3-dp-scan_server-d7237007@03.01.12",
+        "pkg:generic/e3-dp-smm-2dc39c54@03.01.12",
+        "pkg:generic/e3-dp-station-1416f339@03.01.12",
+        "pkg:generic/e3-dp-sys-2b5fea3c@03.01.12",
+        "pkg:generic/e3-dp-wan_led-3f2eb6ea@03.01.12"
+      ],
+      "ref": "pkg:generic/e3-dp@03.01.12"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "bom-ref": "pkg:generic/e3-dp@03.01.12",
+      "group": "",
+      "licenses": [
+        {
+          "license": {
+            "name": "Proprietary"
+          }
+        }
+      ],
+      "name": "E3-DP",
+      "properties": [
+        {
+          "name": "arch",
+          "value": "armv7l"
+        },
+        {
+          "name": "ges:k9-code",
+          "value": "10177705"
+        },
+        {
+          "name": "ges:source-root",
+          "value": "e3dp.2.1"
+        },
+        {
+          "name": "ges:target",
+          "value": "product_source"
+        }
+      ],
+      "purl": "pkg:generic/e3-dp@03.01.12",
+      "supplier": {
+        "name": "GES"
+      },
+      "type": "firmware",
+      "version": "03.01.12"
+    },
+    "supplier": {
+      "name": "GES"
+    },
+    "timestamp": "2026-11-03T10:26:15.534694+00:00",
+    "tools": {
+      "components": [
+        {
+          "name": "sbom_gen.py",
+          "type": "application",
+          "version": "1.0"
+        }
+      ]
+    }
+  },
+  "serialNumber": "urn:uuid:2147a496-52da-4326-9a39-115291c7db70",
+  "specVersion": "1.5",
+  "version": 1
+}

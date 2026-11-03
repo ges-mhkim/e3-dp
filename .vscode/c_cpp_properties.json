@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "e3dp-linux",
+            "includePath": [
+                "${workspaceFolder}/e3dp/e3dp.2.1/include",
+                "${workspaceFolder}/e3dp/e3dp.2.1/include/**",
+                "${workspaceFolder}/e3dp/e3dp.2.1/lib/**",
+                "${workspaceFolder}/e3dp/e3dp.2.1/src/**"
+            ],
+            "defines": [
+                "_GNU_SOURCE",
+                "GNU_SOURCE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/e3dp/e3dp.2.1/include",
+                    "${workspaceFolder}/e3dp/e3dp.2.1/lib",
+                    "${workspaceFolder}/e3dp/e3dp.2.1/src"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            }
+        }
+    ],
+    "version": 4
+}

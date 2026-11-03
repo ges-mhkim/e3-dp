@@ -1,0 +1,352 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1260" width="100%" height="100%">
+<defs>
+    <!-- 화살표 마커 정의 -->
+    <marker id="arr-udp" markerWidth="11" markerHeight="11" refX="9" refY="4.5" orient="auto">
+      <polygon points="0 1.5, 9.5 4.5, 0 7.5" fill="#1d4ed8" />
+    </marker>
+    <marker id="arr-write" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <polygon points="0 1.5, 8.5 4, 0 6.5" fill="#059669" />
+    </marker>
+    <marker id="arr-read" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <polygon points="0 1.5, 8.5 4, 0 6.5" fill="#d97706" />
+    </marker>
+    <marker id="arr-io" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+      <polygon points="0 1, 7.5 3.5, 0 6" fill="#475569" />
+    </marker>
+
+    <!-- 그림자 필터 -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.07" />
+    </filter>
+    <filter id="core-shadow" x="-8%" y="-8%" width="116%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#9333ea" flood-opacity="0.22" />
+    </filter>
+
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 25px; font-weight: 800; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 13.5px; fill: #64748b; }
+      .subgroup-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 17px; font-weight: 700; }
+      .subgroup-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 12px; fill: #64748b; }
+      .node-txt-main { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-txt-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; }
+      .badge-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; }
+      .legend-txt { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; }
+      .ext-tag { font-family: monospace; font-size: 10px; font-weight: 700; fill: #475569; }
+    </style>
+  </defs>
+<rect width="1760" height="1260" fill="#f8fafc" />
+<g transform="translate(50, 42)">
+    <text class="title" x="0" y="0">E3-DP 공유 메모리 데이터 흐름도</text>
+    <text class="subtitle" x="0" y="24">외부 장비/호스트 ↔ 서버 프로세스 군 ↔ 공유 메모리 세그먼트 상호작용 (Bottom to Top 구조)</text>
+  </g>
+<g transform="translate(940, 20)">
+    <rect x="0" y="0" width="770" height="56" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#shadow)" />
+    <!-- UDP -->
+    <line x1="20" y1="28" x2="60" y2="28" stroke="#1d4ed8" stroke-width="3.5" marker-end="url(#arr-udp)" />
+    <text class="legend-txt" x="70" y="32">UDP 메시지 (명령/응답)</text>
+    <!-- 쓰기 -->
+    <line x1="235" y1="28" x2="275" y2="28" stroke="#059669" stroke-width="2.2" marker-end="url(#arr-write)" />
+    <text class="legend-txt" x="285" y="32">공유메모리 쓰기 (W)</text>
+    <!-- 읽기 -->
+    <line x1="445" y1="28" x2="485" y2="28" stroke="#d97706" stroke-width="2.2" stroke-dasharray="5,4" marker-end="url(#arr-read)" />
+    <text class="legend-txt" x="495" y="32">공유메모리 읽기 (R)</text>
+    <!-- I/O -->
+    <line x1="645" y1="28" x2="685" y2="28" stroke="#475569" stroke-width="2" marker-end="url(#arr-io)" />
+    <text class="legend-txt" x="695" y="32">외부 입출력</text>
+  </g>
+<g id="group-shm">
+    <rect x="50" y="100" width="1660" height="340" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)" />
+    <path d="M 50 114 Q 50 100 64 100 L 1696 100 Q 1710 100 1710 114 L 1710 140 L 50 140 Z" fill="#faf5ff" />
+    <text class="subgroup-title" x="75" y="127" fill="#6d28d9">공유 메모리 (Shared Memory Segments)</text>
+    <text class="subgroup-desc" x="430" y="126">커널 상주 메모리 세그먼트 (SysV IPC, 0xE3000000 계열 키) — 잠금(Lock) 없는 고속 공유 데이터 버스</text>
+  </g>
+<g id="group-proc">
+    <rect x="50" y="465" width="1660" height="490" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)" />
+    <path d="M 50 479 Q 50 465 64 465 L 1696 465 Q 1710 465 1710 479 L 1710 505 L 50 505 Z" fill="#eff6ff" />
+    <text class="subgroup-title" x="75" y="492" fill="#1d4ed8">서버 프로세스 (Server Processes)</text>
+    <text class="subgroup-desc" x="380" y="491">상단: 코어 처리 및 제어/알람 엔진 | 하단: 외부 통신 분배, 현장 계측 수집, 상위 보고 인터페이스</text>
+  </g>
+<g id="group-ext">
+    <rect x="50" y="980" width="1660" height="210" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)" />
+    <path d="M 50 994 Q 50 980 64 980 L 1696 980 Q 1710 980 1710 994 L 1710 1020 L 50 1020 Z" fill="#f1f5f9" />
+    <text class="subgroup-title" x="75" y="1007" fill="#334155">외부 (External Systems &amp; Field Devices)</text>
+    <text class="subgroup-desc" x="460" y="1006">상위 관제 호스트 및 현장 하위 계측/통신 장치</text>
+  </g>
+<g id="connections">
+<path d="M 150 1060 C 130.0 983.0, 125.0 916.4, 140 838" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(78.2, 940)">
+        <rect x="0" y="0" width="63.599999999999994" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="31.799999999999997" y="14" fill="#1d4ed8">UDP 요청</text>
+      </g>
+<path d="M 145 770 C 145.0 707.0, 145.0 651.8, 145 586" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(75.2, 670)">
+        <rect x="0" y="0" width="139.6" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="69.8" y="14" fill="#1d4ed8">UDP 8002 구성 다운로드</text>
+      </g>
+<path d="M 195 770 C 222.5 707.0, 290.0 651.8, 330 586" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(172.60000000000002, 670)">
+        <rect x="0" y="0" width="154.79999999999998" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="77.39999999999999" y="14" fill="#1d4ed8">UDP 7032 한계/마스크/AO</text>
+      </g>
+<path d="M 220 770 C 290.0 714.0, 440.0 658.8, 520 586" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(309.2, 680)">
+        <rect x="0" y="0" width="101.6" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="50.8" y="14" fill="#1d4ed8">UDP 8022 제어</text>
+      </g>
+<path d="M 250 804 C 260.0 795.6, 280.0 795.6, 290 804" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(204.0, 782)">
+        <rect x="0" y="0" width="132.0" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="66.0" y="14" fill="#1d4ed8">UDP 8052 실시간 요청</text>
+      </g>
+<path d="M 600 1060 C 590.0 983.0, 590.0 916.4, 600 838" fill="none" stroke="#475569" stroke-width="2.0" marker-end="url(#arr-io)" opacity="0.8" />
+<g transform="translate(563.4, 940)">
+        <rect x="0" y="0" width="33.2" height="20" rx="4" fill="#ffffff" stroke="#475569" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="16.6" y="14" fill="#475569">수집</text>
+      </g>
+<path d="M 890 1060 C 880.0 983.0, 880.0 916.4, 890 838" fill="none" stroke="#475569" stroke-width="2.0" marker-end="url(#arr-io)" opacity="0.8" />
+<g transform="translate(853.4, 940)">
+        <rect x="0" y="0" width="33.2" height="20" rx="4" fill="#ffffff" stroke="#475569" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="16.6" y="14" fill="#475569">수집</text>
+      </g>
+<path d="M 1190 1060 C 1180.0 983.0, 1180.0 916.4, 1190 838" fill="none" stroke="#475569" stroke-width="2.0" marker-end="url(#arr-io)" opacity="0.8" />
+<g transform="translate(1145.8, 940)">
+        <rect x="0" y="0" width="48.4" height="20" rx="4" fill="#ffffff" stroke="#475569" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="24.2" y="14" fill="#475569">ping</text>
+      </g>
+<path d="M 1580 838 C 1595.0 916.4, 1580.0 983.0, 1550 1060" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(1566.8, 940)">
+        <rect x="0" y="0" width="86.39999999999999" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="43.199999999999996" y="14" fill="#1d4ed8">UDP 경보 전송</text>
+      </g>
+<path d="M 1380 838 C 1380 958, 370 970, 250 1060" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(722.0, 955)">
+        <rect x="0" y="0" width="56.0" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="28.0" y="14" fill="#1d4ed8">이력 전송</text>
+      </g>
+<path d="M 340 838 C 315.0 916.4, 245.0 983.0, 200 1060" fill="none" stroke="#1d4ed8" stroke-width="3.2" marker-end="url(#arr-udp)" opacity="0.9" />
+<g transform="translate(258.2, 940)">
+        <rect x="0" y="0" width="63.599999999999994" height="20" rx="4" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.95" />
+        <text class="badge-txt" x="31.799999999999997" y="14" fill="#1d4ed8">실시간 응답</text>
+      </g>
+<path d="M 110 770 C 70 620, 80 442, 120 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 210 520 C 315.0 450.0, 540.0 391.5, 660 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 180 520 C 250.0 422.0, 400.0 353.6, 480 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 150 520 C 190.0 429.0, 280.0 360.6, 330 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 580 770 C 600.0 609.0, 665.0 475.5, 710 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 650 770 C 785.0 623.0, 1080.0 479.6, 1240 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 870 770 C 855.0 609.0, 825.0 475.5, 810 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 920 770 C 1000.0 616.0, 1175.0 472.6, 1270 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 1130 770 C 975.0 644.0, 685.0 500.6, 550 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 1180 770 C 1110.0 602.0, 985.0 468.5, 930 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 890 520 C 885.0 450.0, 875.0 391.5, 870 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 980 520 C 1000.0 436.0, 1040.0 367.6, 1060 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 370 520 C 455.0 450.0, 635.0 391.5, 730 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 550 520 C 605.0 450.0, 715.0 391.5, 770 325" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 1610 770 C 1620.0 637.0, 1620.0 523.0, 1610 390" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 1410 770 C 1420.0 602.0, 1440.0 458.6, 1450 292" fill="none" stroke="#059669" stroke-width="1.8" marker-end="url(#arr-write)" opacity="0.75" />
+<path d="M 350 292 C 385.0 472.6, 475.0 616.0, 530 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 890 325 C 900.0 391.5, 920.0 450.0, 930 520" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 970 325 C 1115.0 517.5, 1395.0 651.0, 1530 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 520 292 C 770.0 535.6, 1285.0 679.0, 1550 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 1100 292 C 1220.0 493.6, 1455.0 637.0, 1570 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 650 325 C 570.0 496.5, 430.0 630.0, 370 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 740 325 C 740.0 391.5, 740.0 450.0, 740 520" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 940 325 C 1050.0 496.5, 1255.0 630.0, 1350 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 1320 292 C 1350.0 465.6, 1405.0 609.0, 1430 770" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+<path d="M 1590 267 C 1582.5 353.1, 1567.5 429.0, 1560 520" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#arr-read)" opacity="0.75" />
+</g>
+<g id="nodes">
+<g id="node-HOST" transform="translate(90, 1060)" filter="url(#shadow)">
+        <rect x="0" y="0" width="220" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.8" />
+        <rect x="0" y="0" width="8" height="76" rx="4" fill="#64748b" />
+        <text class="node-txt-main" x="110.0" y="30.0" fill="#0f172a">Host 서버</text>
+        <text class="node-txt-sub" x="110.0" y="49.0">상위 관제 시스템</text>
+        <rect x="152" y="6" width="60" height="16" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+        <text class="ext-tag" x="182" y="18" text-anchor="middle">UDP 통신</text>
+      </g>
+<g id="node-GW" transform="translate(510, 1060)" filter="url(#shadow)">
+        <rect x="0" y="0" width="180" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.8" />
+        <rect x="0" y="0" width="8" height="76" rx="4" fill="#64748b" />
+        <text class="node-txt-main" x="90.0" y="30.0" fill="#0f172a">E3-GW</text>
+        <text class="node-txt-sub" x="90.0" y="49.0">현장 게이트웨이 (1502)</text>
+        <rect x="112" y="6" width="60" height="16" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+        <text class="ext-tag" x="142" y="18" text-anchor="middle">TCP/IP</text>
+      </g>
+<g id="node-RECT" transform="translate(800, 1060)" filter="url(#shadow)">
+        <rect x="0" y="0" width="180" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.8" />
+        <rect x="0" y="0" width="8" height="76" rx="4" fill="#64748b" />
+        <text class="node-txt-main" x="90.0" y="30.0" fill="#0f172a">정류기</text>
+        <text class="node-txt-sub" x="90.0" y="49.0">전원/배터리 장치 (시리얼)</text>
+        <rect x="112" y="6" width="60" height="16" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+        <text class="ext-tag" x="142" y="18" text-anchor="middle">RS-232/485</text>
+      </g>
+<g id="node-PING" transform="translate(1090, 1060)" filter="url(#shadow)">
+        <rect x="0" y="0" width="200" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.8" />
+        <rect x="0" y="0" width="8" height="76" rx="4" fill="#64748b" />
+        <text class="node-txt-main" x="100.0" y="30.0" fill="#0f172a">하위 장비 (ping)</text>
+        <text class="node-txt-sub" x="100.0" y="49.0">IP 네트워크 핑 감시 대상</text>
+        <rect x="132" y="6" width="60" height="16" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+        <text class="ext-tag" x="162" y="18" text-anchor="middle">ICMP</text>
+      </g>
+<g id="node-AHOST" transform="translate(1440, 1060)" filter="url(#shadow)">
+        <rect x="0" y="0" width="220" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.8" />
+        <rect x="0" y="0" width="8" height="76" rx="4" fill="#64748b" />
+        <text class="node-txt-main" x="110.0" y="30.0" fill="#0f172a">Alarm Host</text>
+        <text class="node-txt-sub" x="110.0" y="49.0">경보 전송 수신 호스트</text>
+        <rect x="152" y="6" width="60" height="16" rx="3" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" />
+        <text class="ext-tag" x="182" y="18" text-anchor="middle">UDP 경보</text>
+      </g>
+<g id="node-DB" transform="translate(90, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="150" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="75.0" y="28.0" fill="#1e40af">db_server</text>
+        <text class="node-txt-sub" x="75.0" y="48.0">구성 DB 복원/다운로드</text>
+      </g>
+<g id="node-CFG" transform="translate(270, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="28.0" fill="#1e40af">config_server</text>
+        <text class="node-txt-sub" x="80.0" y="48.0">설정/한계치/AO 제어</text>
+      </g>
+<g id="node-CTRL" transform="translate(460, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="28.0" fill="#1e40af">control_server</text>
+        <text class="node-txt-sub" x="80.0" y="48.0">제어 룰/시퀀스 실행</text>
+      </g>
+<g id="node-RDS" transform="translate(660, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="28.0" fill="#1e40af">realdata_server</text>
+        <text class="node-txt-sub" x="80.0" y="48.0">실시간 데이터 서비스</text>
+      </g>
+<g id="node-SCAN" transform="translate(860, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="28.0" fill="#1e40af">scan_server</text>
+        <text class="node-txt-sub" x="80.0" y="48.0">알람 판정/정전 감시</text>
+      </g>
+<g id="node-SMM" transform="translate(1480, 520)" filter="url(#shadow)">
+        <rect x="0" y="0" width="150" height="66" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="75.0" y="28.0" fill="#1e40af">smm</text>
+        <text class="node-txt-sub" x="75.0" y="48.0">프로세스 생존 감시</text>
+      </g>
+<g id="node-MAIN" transform="translate(90, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="68" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2.6" />
+        <text class="node-txt-main" x="80.0" y="29.0" fill="#1e3a8a" font-size="16px">main_server</text>
+        <text class="node-txt-sub" x="80.0" y="50.0" fill="#1d4ed8" font-weight="600">통신/명령 분배 (핵심)</text>
+      </g>
+<g id="node-RT" transform="translate(290, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="140" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="70.0" y="29.0" fill="#1e40af">rt_server</text>
+        <text class="node-txt-sub" x="70.0" y="49.0">실시간 데이터 응답</text>
+      </g>
+<g id="node-GWS" transform="translate(510, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="180" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="90.0" y="29.0" fill="#1e40af">gw_server</text>
+        <text class="node-txt-sub" x="90.0" y="49.0">GW 계측 데이터 수집</text>
+      </g>
+<g id="node-RECTS" transform="translate(800, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="180" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="90.0" y="29.0" fill="#1e40af">rect_server</text>
+        <text class="node-txt-sub" x="90.0" y="49.0">정류기 계측 수집</text>
+      </g>
+<g id="node-NET" transform="translate(1090, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="200" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="100.0" y="29.0" fill="#1e40af">netcheck_server</text>
+        <text class="node-txt-sub" x="100.0" y="49.0">Ping 감시 및 통신품질</text>
+      </g>
+<g id="node-GATH" transform="translate(1330, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="29.0" fill="#1e40af">gather_server</text>
+        <text class="node-txt-sub" x="80.0" y="49.0">정시/이력 생성 전송</text>
+      </g>
+<g id="node-ALM" transform="translate(1520, 770)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="68" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="1.6" />
+        <text class="node-txt-main" x="80.0" y="29.0" fill="#1e40af">alarm_server</text>
+        <text class="node-txt-sub" x="80.0" y="49.0">경보 감지/전송/이력</text>
+      </g>
+<g id="node-NCFG" transform="translate(90, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="150" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 75.0 16 150 8 L 150 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="81.0" y="32.0" fill="#6b21a8">netconfig</text>
+        <text class="node-txt-sub" x="75.0" y="52.0">네트워크 통신 설정</text>
+      </g>
+<g id="node-RAW" transform="translate(270, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="140" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 70.0 16 140 8 L 140 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="76.0" y="32.0" fill="#6b21a8">raw_idx</text>
+        <text class="node-txt-sub" x="70.0" y="52.0">GW 포인트 인덱스 맵</text>
+      </g>
+<g id="node-DRSI" transform="translate(440, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 80.0 16 160 8 L 160 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="86.0" y="32.0" fill="#6b21a8">DrSI 시스템 DB</text>
+        <text class="node-txt-sub" x="80.0" y="52.0">시스템 정보/통신상태</text>
+      </g>
+<g id="node-DRDB" transform="translate(630, 185)" filter="url(#core-shadow)">
+        <rect x="0" y="0" width="360" height="140" rx="14" fill="#fdf4ff" stroke="#9333ea" stroke-width="2.8" />
+        <path d="M 0 14 Q 0 0 14 0 L 346 0 Q 360 0 360 14 L 360 32 L 0 32 Z" fill="#f5d0fe" />
+        <text class="node-txt-main" x="180.0" y="22" fill="#701a75" font-size="16px">★ DrDB 포인트 DB ★</text>
+        <line x1="0" y1="32" x2="360" y2="32" stroke="#e9d5ff" stroke-width="1.2" />
+        <text class="node-txt-sub" x="180.0" y="56" fill="#581c87" font-weight="700" font-size="12.5px">E3-DP 핵심 실시간 계측 데이터베이스</text>
+        <text class="node-txt-sub" x="180.0" y="78" fill="#4a044e">실시간 계측값(value), 상태(status), 통신상태(com_status) 총괄</text>
+        <text class="node-txt-sub" x="180.0" y="100" fill="#047857" font-weight="600">쓰기(W): db, gw, rect, net, scan, cfg, ctrl</text>
+        <text class="node-txt-sub" x="180.0" y="122" fill="#b45309" font-weight="600">읽기(R): scan, alm, rt, rds, gath</text>
+      </g>
+<g id="node-FLG" transform="translate(1020, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="160" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 80.0 16 160 8 L 160 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="86.0" y="32.0" fill="#6b21a8">정전/발전기 플래그</text>
+        <text class="node-txt-sub" x="80.0" y="52.0">MAIN_PE_FLAG 등</text>
+      </g>
+<g id="node-HIST" transform="translate(1210, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="170" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 85.0 16 170 8 L 170 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="91.0" y="32.0" fill="#6b21a8">PeakDB / DcdsDB
+/ UpsDB</text>
+        <text class="node-txt-sub" x="85.0" y="52.0">각종 이력 DB 버퍼</text>
+      </g>
+<g id="node-PCB" transform="translate(1400, 220)" filter="url(#shadow)">
+        <rect x="0" y="0" width="120" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 60.0 16 120 8 L 120 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="66.0" y="32.0" fill="#6b21a8">DrPCB</text>
+        <text class="node-txt-sub" x="60.0" y="52.0">정시 데이터 이력</text>
+      </g>
+<g id="node-ACB" transform="translate(1540, 320)" filter="url(#shadow)">
+        <rect x="0" y="0" width="140" height="70" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 70.0 16 140 8 L 140 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="76.0" y="31.0" fill="#6b21a8">DR_ACB</text>
+        <text class="node-txt-sub" x="70.0" y="51.0">경보 버퍼 (alarm.db)</text>
+      </g>
+<g id="node-SM" transform="translate(1540, 195)" filter="url(#shadow)">
+        <rect x="0" y="0" width="130" height="72" rx="10" fill="#ffffff" stroke="#9333ea" stroke-width="1.8" />
+        <path d="M 0 8 Q 65.0 16 130 8 L 130 0 L 0 0 Z" fill="#f3e8ff" />
+        <!-- DB 실린더 아이콘 표시 -->
+        <ellipse cx="18" cy="18" rx="8" ry="4" fill="#e9d5ff" stroke="#9333ea" stroke-width="1" />
+        <path d="M 10 18 L 10 24 Q 18 28 26 24 L 26 18" fill="none" stroke="#9333ea" stroke-width="1" />
+        <text class="node-txt-main" x="71.0" y="32.0" fill="#6b21a8">shard_m</text>
+        <text class="node-txt-sub" x="65.0" y="52.0">서버 생존 슬롯 카운터</text>
+      </g>
+</g>
+<g transform="translate(60, 1225)">
+    <text class="subtitle" x="0" y="0">※ e3dp/docs/공유메모리구조.md 제6절 데이터 흐름 다이어그램 (BT: Bottom to Top) 기반 SVG 렌더링</text>
+    <text class="subtitle" x="1640" y="0" text-anchor="end">E3-DP Architecture Documentation</text>
+  </g>
+</svg>

@@ -16,3 +16,8 @@ make
 #
 #
 make clean all
+cd ~
+ll
+cd e3dp.2.1
+ll
+sudo make

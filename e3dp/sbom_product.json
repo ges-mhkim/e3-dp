@@ -1,0 +1,17 @@
+{
+  "company": "GES",
+  "device_name": "E3-DP",
+  "version": "03.01.12",
+  "arch": "armv7l",
+  "license": "Proprietary",
+  "component_type": "firmware",
+  "product_code": "10177705",
+  "source_root": "e3dp.2.1",
+  "scan_dirs": [
+    "bin",
+    "src",
+    "cgi-bin",
+    "web"
+  ],
+  "spdx_license": "LicenseRef-Proprietary"
+}
