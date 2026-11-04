@@ -94,7 +94,7 @@ apt-get install -y --no-install-recommends \
   linux-image-armmp u-boot-sunxi initramfs-tools \
   systemd-sysv udev kmod iproute2 iputils-ping \
   openssh-server systemd-resolved nano less e2fsprogs \
-  gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk \
+  ifupdown dhcpcd-base gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk \
   util-linux-extra fake-hwclock systemd-timesyncd wireless-regdb logrotate
 ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 apt-get clean
@@ -157,25 +157,29 @@ Path=!platform-1c30000.ethernet
 [Link]
 Name=eth1
 EOF
+# 네트워크 관리: ifupdown (/etc/network/interfaces). e3dp util/config.c 가 이 파일을 직접 생성한다.
 # eth0: DHCP, eth1: 고정 192.168.123.2/24 (케이블이 없어도 주소를 유지)
-cat > "$ROOTFS/etc/systemd/network/20-eth0.network" <<'EOF'
-[Match]
-Name=eth0
+# systemd-networkd 는 ifupdown 과 같은 NIC 을 두고 충돌하므로 사용하지 않는다. (.link 는 이름 고정용이라 유지)
+cat > "$ROOTFS/etc/network/interfaces" <<'EOF'
+source /etc/network/interfaces.d/*
 
-[Network]
-DHCP=yes
-EOF
-cat > "$ROOTFS/etc/systemd/network/21-eth1.network" <<'EOF'
-[Match]
-Name=eth1
+auto lo
+iface lo inet loopback
 
-[Network]
-Address=192.168.123.2/24
-ConfigureWithoutCarrier=yes
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+	address 192.168.123.2
+	netmask 255.255.255.0
 EOF
-chroot "$ROOTFS" systemctl enable systemd-networkd systemd-resolved ssh >/dev/null 2>&1 || true
-# 랜선이 없어도 부팅이 지연되지 않도록 네트워크 대기 서비스는 끔 (DHCP는 연결되는 즉시 동작)
-chroot "$ROOTFS" systemctl disable systemd-networkd-wait-online.service >/dev/null 2>&1 || true
+chroot "$ROOTFS" systemctl enable networking systemd-resolved ssh >/dev/null 2>&1 || true
+chroot "$ROOTFS" systemctl disable systemd-networkd systemd-networkd-wait-online.service >/dev/null 2>&1 || true
+# 랜선이 없어도 부팅이 지연되지 않도록 ifupdown 대기 서비스는 끔
+chroot "$ROOTFS" systemctl disable ifupdown-wait-online.service >/dev/null 2>&1 || true
+# e3dp 설정 파일(nelite.conf) 위치. util/config.c 가 쓰고 main_server 가 읽는다. (디렉터리가 없으면 쓰기/읽기 실패)
+mkdir -p "$ROOTFS/opt/e3dp/conf"
 ln -sf /run/systemd/resolve/stub-resolv.conf "$ROOTFS/etc/resolv.conf"
 mkdir -p "$ROOTFS/etc/ssh/sshd_config.d"
 printf 'PermitRootLogin yes\nPasswordAuthentication yes\n' > "$ROOTFS/etc/ssh/sshd_config.d/10-poc.conf"
