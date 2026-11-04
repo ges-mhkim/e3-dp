@@ -1,8 +1,15 @@
 #!/bin/bash
 # NanoPi NEO (Allwinner H3) 용 Debian 13 (trixie) armhf PoC microSD 이미지 빌드
-# WSL2 Ubuntu 에서 root 로 실행. 결과: $OUT/e3dp-poc-debian13-armhf.img
+# WSL2 Ubuntu 에서 실행 (root 가 아니면 sudo 로 자동 재실행). 결과: $OUT/e3dp-poc-debian13-armhf.img
 # PoC 전용: 보안보다 시험 편의를 우선함 (root 비밀번호 로그인 허용, 시리얼 자동 로그인, 점검 도구 포함)
 set -euo pipefail
+
+# debootstrap/mount/chroot 는 root 권한이 필요하다. root 가 아니면 sudo 로 자신을 다시 실행한다 (비밀번호 입력 요청).
+# OUT, IMG_SIZE_MB, ROOT_PW, PI_PW 환경변수는 유지한다.
+if [ "$(id -u)" -ne 0 ]; then
+  echo "root 권한이 필요합니다. sudo 로 다시 실행합니다..."
+  exec sudo --preserve-env=OUT,IMG_SIZE_MB,ROOT_PW,PI_PW bash "$(readlink -f "${BASH_SOURCE[0]}")" "$@"
+fi
 
 # 실행 로그: 화면과 스크립트 폴더에 표준 출력/오류를 함께 기록한다.
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
@@ -94,7 +101,7 @@ apt-get install -y --no-install-recommends \
   linux-image-armmp u-boot-sunxi initramfs-tools \
   systemd-sysv udev kmod iproute2 iputils-ping \
   openssh-server systemd-resolved nano less e2fsprogs \
-  ifupdown dhcpcd-base gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk \
+  ifupdown dhcpcd-base gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk htop lsof tmux traceroute mtr-tiny iftop nload ngrep bind9-dnsutils netcat-openbsd socat arping conntrack \
   util-linux-extra fake-hwclock systemd-timesyncd wireless-regdb logrotate
 ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 apt-get clean
@@ -131,7 +138,7 @@ apt-get install -y --no-install-recommends \
   sudo vim expect telnet telnetd ftp vsftpd openbsd-inetd \
   dnsmasq hostapd wpasupplicant wireless-tools iw rfkill bluez udhcpd ppp fping iptables usb-modeswitch \
   alsa-utils madplay figlet toilet bc busybox cpio psmisc aptitude cron openssl whiptail bzip2 lsb-release fakeroot \
-  kbd manpages manpages-dev openssh-sftp-server netbase acl at ncurses-term memtester iperf libubootenv-tool cifs-utils \
+  kbd manpages manpages-dev openssh-sftp-server netbase acl at ncurses-term memtester iperf iperf3 libubootenv-tool cifs-utils \
   libx264-dev libmp3lame-dev libpulse-dev libv4l-dev libjpeg-dev libasound2-dev libusb-1.0-0-dev libusb-dev libusb-0.1-4
 # dnsmasq 는 설치만 하고 부팅 때 자동 시작하지 않는다 (systemd-resolved 스텁 DNS(53번 포트)와 충돌해 실패하므로 필요할 때 켠다)
 systemctl disable dnsmasq >/dev/null 2>&1 || true
@@ -200,12 +207,39 @@ EOF
 sed -i '/^BUILD_ID=/d' "$ROOTFS/etc/os-release"
 echo "BUILD_ID=$(TZ=Asia/Seoul date +%Y%m%d_%H%M%S)" >> "$ROOTFS/etc/os-release"
 
-# 저널은 만들지 않는다 (디스크 /var/log/journal 도, RAM /run/log/journal 도 사용하지 않음).
-# 전원 버튼이 없어 전원이 수시로 끊기는 제품이므로 저널 I/O 와 RAM 낭비를 없앤다.
-# 서비스 로그는 각 서비스가 /var/log (RAM tmpfs) 에 직접 남긴다. 커널 메시지는 dmesg 로 확인한다.
+# 저널은 디스크에 쓰지 않고 RAM(/run/log/journal, tmpfs)에만 둔다. 용량 상한에 닿으면 오래된 것부터 지워 순환한다.
+# 전원이 수시로 끊기는 제품이므로 재부팅하면 로그가 사라지는 것을 허용한다 (디스크 I/O 없음).
+# 서비스의 stdout/stderr 는 journald 로 통합되어 docker logs 처럼 `logs 서비스 [-f]` 로 본다.
 mkdir -p "$ROOTFS/etc/systemd/journald.conf.d"
-printf '[Journal]\nStorage=none\nForwardToSyslog=no\nForwardToKMsg=no\nForwardToConsole=no\nForwardToWall=no\n' > "$ROOTFS/etc/systemd/journald.conf.d/10-volatile.conf"
+cat > "$ROOTFS/etc/systemd/journald.conf.d/10-volatile.conf" <<'EOF2'
+[Journal]
+Storage=volatile
+RuntimeMaxUse=8M
+RuntimeMaxFileSize=1M
+ForwardToSyslog=no
+ForwardToKMsg=no
+ForwardToConsole=no
+ForwardToWall=no
+EOF2
 rm -rf "$ROOTFS/var/log/journal"
+
+# docker logs 와 같은 사용법의 래퍼.
+cat > "$ROOTFS/usr/local/bin/logs" <<'EOF2'
+#!/bin/sh
+# 사용법: logs [서비스] [-f] [-n 줄수] [--since "10 min ago"]
+#   logs e3dp            전체 로그 출력        logs e3dp -f           최근 로그부터 실시간 출력
+#   logs e3dp -n 100     마지막 100줄          logs -f                모든 서비스(커널 포함) 실시간
+# 서비스 이름을 생략하면 전체 로그다. 서비스 이름은 .service 를 붙이지 않아도 된다.
+UNIT=
+case "${1:-}" in -*|"") ;; *) UNIT="-u $1"; shift ;; esac
+FOLLOW=
+for a in "$@"; do [ "$a" = "-f" ] && FOLLOW=1; done
+# -f 만 주면 journalctl 은 최근 10줄부터 시작하므로 docker 처럼 전체 이력 뒤에 이어 붙이도록 -n 을 보정한다.
+if [ -n "$FOLLOW" ] && ! echo " $* " | grep -q ' -n '; then set -- "$@" -n 200; fi
+# shellcheck disable=SC2086
+exec journalctl $UNIT --no-pager -o short-iso "$@"
+EOF2
+chmod +x "$ROOTFS/usr/local/bin/logs"
 
 # 그 외 /var/log/*.log: 1MB 를 넘으면 순환, 10개 보관, 오래된 것은 gzip 압축.
 cat > "$ROOTFS/etc/logrotate.d/poc-logs" <<'EOF'

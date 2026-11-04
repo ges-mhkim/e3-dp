@@ -109,7 +109,7 @@ WSL2 Ubuntu(root)
 | 시간·로그 | `fake-hwclock`, `systemd-timesyncd`, `logrotate` |
 | 무선 규제 | `wireless-regdb` (Wi-Fi 접속 설정 없음) |
 | 하드웨어 점검 | `gpiod`, `i2c-tools`, `usbutils`, `ethtool` |
-| 통신·분석 | `net-tools`, `curl`, `tcpdump`, `strace`, `file` |
+| 통신·분석 | `net-tools`, `curl`, `tcpdump`, `strace`, `file`, `htop`, `lsof`, `tmux`, `traceroute`, `mtr-tiny`, `iftop`, `nload`, `ngrep`, `bind9-dnsutils`, `netcat-openbsd`, `socat`, `arping`, `conntrack` |
 
 - 커널·U-Boot: 소스 빌드 없이 Debian 패키지 바이너리 사용
 - 점검 도구 설치 ≠ GPIO/I2C 활성화·핀 설정
@@ -156,7 +156,7 @@ WSL2 Ubuntu(root)
 **로그와 디스크 쓰기**
 - tmpfs(`/var/log`, `/var/tmp`, `/tmp`, `/dev/shm`): 재부팅 시 소멸
 - `/var/lib`, `/var/cache`: 디스크 유지
-- journald: `Storage=none` (저널 미생성)
+- journald: `Storage=volatile` (RAM 전용, 최대 8M, 파일당 1M, 가득 차면 오래된 것부터 삭제)
 - logrotate: `/var/log/*.log`, 매시간 검사, `size 1M`, `rotate 10`, `compress`, `delaycompress`, `copytruncate`, 상태 파일 `/run/logrotate.status`
 - 루트 ext4는 읽기·쓰기 상태 → 전원 차단 안전성 미보장
 
@@ -528,7 +528,7 @@ phy-sun4i-usb
 chroot "$ROOTFS" /bin/bash
 export DEBIAN_FRONTEND=noninteractive LC_ALL=C
 apt-get update
-apt-get install -y --no-install-recommends linux-image-armmp u-boot-sunxi initramfs-tools systemd-sysv udev kmod iproute2 iputils-ping openssh-server systemd-resolved nano less e2fsprogs gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk util-linux-extra fake-hwclock systemd-timesyncd wireless-regdb logrotate
+apt-get install -y --no-install-recommends linux-image-armmp u-boot-sunxi initramfs-tools systemd-sysv udev kmod iproute2 iputils-ping openssh-server systemd-resolved nano less e2fsprogs gpiod i2c-tools usbutils ethtool net-tools curl tcpdump strace file fdisk htop lsof tmux traceroute mtr-tiny iftop nload ngrep bind9-dnsutils netcat-openbsd socat arping conntrack util-linux-extra fake-hwclock systemd-timesyncd wireless-regdb logrotate
 ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 apt-get clean
 exit
@@ -562,7 +562,7 @@ exit
 chroot "$ROOTFS" /bin/bash
 export DEBIAN_FRONTEND=noninteractive LC_ALL=C
 apt-get update
-apt-get install -y --no-install-recommends sudo vim expect telnet telnetd ftp vsftpd openbsd-inetd dnsmasq hostapd wpasupplicant wireless-tools iw rfkill bluez udhcpd ppp fping iptables usb-modeswitch alsa-utils madplay figlet toilet bc busybox cpio psmisc aptitude cron openssl whiptail bzip2 lsb-release fakeroot kbd manpages manpages-dev openssh-sftp-server netbase acl at ncurses-term memtester iperf libubootenv-tool cifs-utils libx264-dev libmp3lame-dev libpulse-dev libv4l-dev libjpeg-dev libasound2-dev libusb-1.0-0-dev libusb-dev libusb-0.1-4
+apt-get install -y --no-install-recommends sudo vim expect telnet telnetd ftp vsftpd openbsd-inetd dnsmasq hostapd wpasupplicant wireless-tools iw rfkill bluez udhcpd ppp fping iptables usb-modeswitch alsa-utils madplay figlet toilet bc busybox cpio psmisc aptitude cron openssl whiptail bzip2 lsb-release fakeroot kbd manpages manpages-dev openssh-sftp-server netbase acl at ncurses-term memtester iperf iperf3 libubootenv-tool cifs-utils libx264-dev libmp3lame-dev libpulse-dev libv4l-dev libjpeg-dev libasound2-dev libusb-1.0-0-dev libusb-dev libusb-0.1-4
 systemctl disable dnsmasq
 apt-get clean
 exit
@@ -668,7 +668,8 @@ mkdir -p "$ROOTFS/etc/systemd/journald.conf.d"
 ### 8.9 RAM 로그와 순환 설정
 
 - `/var/log`, `/var/tmp`, `/tmp`, `/dev/shm`: 8.4의 tmpfs. 재부팅 시 소멸
-- journald: 저널을 만들지 않음 (`Storage=none`). 디스크 I/O 와 RAM 을 쓰지 않으며, 커널 메시지는 `dmesg` 로 확인
+- journald: RAM 전용 (`Storage=volatile`, `/run/log/journal`). 디스크 I/O 없음, 최대 8 MiB, 가득 차면 오래된 것부터 삭제(순환). 재부팅 시 소멸
+- `logs` 래퍼(`/usr/local/bin/logs`): docker logs 와 같은 사용법. `logs 서비스`, `logs 서비스 -f`, `logs 서비스 -n 100`, `logs -f`(전체)
 - 일반 로그: 1 MiB 초과 시 매시간 검사에서 순환
 - `/var/lib`, `/var/cache`: 디스크 유지
 
@@ -680,7 +681,9 @@ vi "$ROOTFS/etc/systemd/journald.conf.d/10-volatile.conf"
 
 ```text
 [Journal]
-Storage=none
+Storage=volatile
+RuntimeMaxUse=8M
+RuntimeMaxFileSize=1M
 ForwardToSyslog=no
 ForwardToKMsg=no
 ForwardToConsole=no
@@ -689,6 +692,25 @@ ForwardToWall=no
 
 ```bash
 rm -rf "$ROOTFS/var/log/journal"
+```
+
+`logs` 래퍼 (`/usr/local/bin/logs`, 실행 권한 필요):
+
+```bash
+vi "$ROOTFS/usr/local/bin/logs"
+chmod +x "$ROOTFS/usr/local/bin/logs"
+```
+
+파일 내용:
+
+```sh
+#!/bin/sh
+UNIT=
+case "${1:-}" in -*|"") ;; *) UNIT="-u $1"; shift ;; esac
+FOLLOW=
+for a in "$@"; do [ "$a" = "-f" ] && FOLLOW=1; done
+if [ -n "$FOLLOW" ] && ! echo " $* " | grep -q ' -n '; then set -- "$@" -n 200; fi
+exec journalctl $UNIT --no-pager -o short-iso "$@"
 ```
 
 ```bash
