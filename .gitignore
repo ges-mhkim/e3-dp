@@ -6,3 +6,5 @@
 /poc/*.img.*
 /os_*
 /_backup
+/202*/
+*.~vsdx
